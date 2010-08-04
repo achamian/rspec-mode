@@ -94,7 +94,7 @@
   "*Whether rspec runner is run using rake spec task or the spec command"
   :tag "Rspec runner command"
   :type '(radio (const :tag "Use 'rake spec' task" t)
-                (const :tag "Use 'spec' command" nil))
+                (const :tag "Use 'rspec' command" nil))
   :group 'rspec-mode)
 
 ;;;###autoload
@@ -191,7 +191,7 @@
   "Runs the 'spec' rake task for the project of the current file."
   (interactive)
   (let ((default-directory (or (rspec-project-root) default-directory)))
-    (rspec-run (rspec-core-options "--format=progress"))))
+    (rspec-run (rspec-core-options "--format=documentation"))))
 
 (defun rspec-toggle-spec-and-target ()
   "Switches to the spec for the current buffer if it is a
@@ -269,7 +269,7 @@
       (concat "--options " (rspec-spec-opts-file))
     (if default-options
         default-options
-        (concat "--format specdoc " "--reverse"))))
+        (concat "--format documentation "))))
 
 (defun rspec-spec-opts-file ()
   "Returns filename of spec opts file (usually spec/spec.opts)"
@@ -277,7 +277,7 @@
 
 (defun rspec-runner ()
   "Returns command line to run rspec"
-  (if rspec-use-rake-flag "rake spec" "spec"))
+  (if rspec-use-rake-flag "rake spec" "rspec"))
 
 (defun rspec-runner-options (&optional opts)
   "Returns string of options for command line"
